@@ -5,7 +5,8 @@ class FormsController < ApplicationController
   before_filter :before_deadline, :only => [ :new, :create ]
 
   def index
-    @forms = Form.order('id DESC').paginate(:page => params[:page], :per_page => 10) if staff?
+    params[:page].try { |p| cookies[:page] = p.to_i > 0 ? p : 1 }
+    @forms = Form.order('id DESC').paginate(:page => cookies[:page], :per_page => 10) if staff?
     @form = Form.find_by_id(cookies[:form_id]) if cookies[:form_id]
     @form = nil unless is_remembered?
     @deadline_exceed = deadline?

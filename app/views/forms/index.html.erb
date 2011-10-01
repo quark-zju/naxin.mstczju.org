@@ -1,6 +1,7 @@
 <% if @forms %>
 <h1>报名表列表</h1>
 <%= link_to '取消 staff 身份', '/unstaff' %>
+<%= link_to_function '切换自动折行', '$("pre").toggleClass("wrap");' %>
 
 <%= will_paginate @forms %>
 
@@ -32,7 +33,7 @@
       <%  { '' => form.self_intro, '喜爱的软件' => form.fav_soft, '对 MSTC 的意见' => form.mstc_opinion, '其他' => form.other, 'Staff 注释' => form.comments }.each do |k, v| %> 
         <% if v.present? %>
           <%= k %>
-        <pre><%= v %></pre>
+        <pre class='wrap'><%= v %></pre>
         <% end %>
       <% end %>
       <!-- td><%= link_to 'Destroy', form, confirm: 'Are you sure?', method: :delete %></td -->
