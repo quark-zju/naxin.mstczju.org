@@ -24,13 +24,14 @@
   <%  { '' => @form.self_intro, '喜爱的软件' => @form.fav_soft, '对 MSTC 的意见' => @form.mstc_opinion, '其他' => @form.other, '注释' => @form.comments }.each do |k, v| %> 
     <% if v.present? %>
       <%= k %>
-        <pre><%= v %></pre>
+        <pre class='wrap'><%= v %></pre>
     <% end %>
   <% end %>
 
 <%= form_for(@form) do |f| %>
+  <%= hidden_field_tag :old_comments, @form.comments %>
   <div class="field">
-    <div><%= f.label :comments %></div>
+    <div><%= f.label :comments, '新注释' %></div>
     <div><%= f.text_area :comments %></div>
   </div>
   <div class="actions">

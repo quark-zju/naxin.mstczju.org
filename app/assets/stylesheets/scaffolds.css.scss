@@ -16,6 +16,9 @@ pre {
   margin: 0px 0px 2px;
   overflow: auto;
   font-size: 13px;
+  &.comments {
+    background: #FFF6BF;
+  }
   &.wrap {
     white-space: pre-wrap;       /* css-3 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */

@@ -30,10 +30,11 @@
         <%= l(form.created_at) %> 
       </div>
 
-      <%  { '' => form.self_intro, '喜爱的软件' => form.fav_soft, '对 MSTC 的意见' => form.mstc_opinion, '其他' => form.other, 'Staff 注释' => form.comments }.each do |k, v| %> 
+      <%  { '' => form.self_intro, '喜爱的软件' => form.fav_soft, '对 MSTC 的意见' => form.mstc_opinion, '其他' => form.other, [ 'Staff 注释', 'comments' ] => form.comments }.each do |k, v| %> 
+        <% k, c = *k if k.is_a? Array %>
         <% if v.present? %>
           <%= k %>
-        <pre class='wrap'><%= v %></pre>
+          <pre class='wrap<%= " #{c}" if c.present? %>'><%= v %></pre>
         <% end %>
       <% end %>
       <!-- td><%= link_to 'Destroy', form, confirm: 'Are you sure?', method: :delete %></td -->

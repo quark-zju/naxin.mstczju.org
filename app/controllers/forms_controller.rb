@@ -50,7 +50,17 @@ class FormsController < ApplicationController
     
     # check staff
     if staff?
-      if @form.update_attributes(params[:form])
+      # smart update form according to legacy_comments
+      comments = String.new(@form.comments.to_s)
+      new_comments = params[:form][:comments]
+
+      if comments[params[:old_comments]]
+        comments.sub! params[:old_comments], new_comments
+      else
+        comments << "\r\n-----\r\n#{new_comments}"
+      end
+
+      if @form.update_attributes(comments: comments) 
         redirect_to forms_url, notice: '注释更新成功 :)'
       else
         render action: "edit"
@@ -58,7 +68,7 @@ class FormsController < ApplicationController
     else
       # check belonging
       if is_remembered?
-        params[:comments] = nil
+        params[:form].try { |p| p[:comments] = nil }
         if @form.update_attributes(params[:form])
           redirect_to forms_url, notice: '报名表更新成功 :)'
         else
