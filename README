@@ -1,0 +1,14 @@
+A simple site to submit applications for MSTC (Microsoft Technology Club) of Zhejiang University, 2011
+
+
+Configuration
+====
+
+Authorized parameter
+----
+app/controllers/forms_controller.rb, modify 'staff?'
+
+Deadline
+----
+app/controllers/forms_controller.rb, modify 'deadline?'
+

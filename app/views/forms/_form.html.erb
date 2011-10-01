@@ -1,0 +1,77 @@
+<%= form_for(@form, :validate => true) do |f| %>
+  <% if @form.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @form.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <div>
+      <%= f.label :name %>
+    </div>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <div><%= f.label :tel %></div>
+    <span class='tip'>如果既有长号又有短号，可以用空格分开，类似这样: <code>15900000000 590000</code></span>
+    <div><%= f.text_field :tel %></div>
+  </div>
+  <div class="field">
+    <div><%= f.label :major %></div>
+    <%= f.text_field :major %>
+  </div>
+  <div class="field">
+    <div><%= f.label :gender %></div>
+    <%= f.select :gender, options_for_select([ [ '男', 1 ], [ '女', 2 ] ], @form.gender) %>
+  </div>
+  <div class="field">
+    <div><%= f.label :email %></div>
+    <span class='tip'>不要填写 <code>st.zju.edu.cn</code> 的邮箱</span>
+    <div><%= f.text_field :email %></div>
+  </div>
+  <div class="field">
+    <div><%= f.label :forum_id %></div>
+    <span class='tip'><%= link_to 'CC98', 'http://www.cc98.org', target: '_blank' %> 和 <%= link_to 'Freecity', 'http://freecity.cn', target: '_blank' %> 是学校内网的两个主要论坛</span>
+    <div><%= f.text_field :forum_id %></div>
+  </div>
+  <p>勾选你感兴趣的 Group （可以多选）<br>
+  <span class='tip'>不知道如何选？可以看看<%= link_to '这里', about_url, :target => "_blank" %>的 MSTC 简介</span></p>
+  <div class="field">
+    <%= f.check_box :og %>
+    <%= f.label :og %>
+  </div>
+  <div class="field">
+    <%= f.check_box :cg %>
+    <%= f.label :cg %>
+  </div>
+  <div class="field">
+    <%= f.check_box :pg %>
+    <%= f.label :pg %> 
+  </div>
+  <div class="field">
+    <div><%= f.label :self_intro %></div>
+    <%= f.text_area :self_intro %>
+  </div>
+  <div class="field">
+    <div><%= f.label :fav_soft %></div>
+    <span class='tip'>你可以从技术或者非技术的角度任意回答，并不必局限于微软</span>
+    <div><%= f.text_area :fav_soft %></div>
+  </div>
+  <div class="field">
+    <div><%= f.label :mstc_opinion %></div>
+    <span class='tip'>MSTC 现有活动可参考<%= link_to '这里', about_url, :target => "_blank" %>的介绍</span>
+    <div><%= f.text_area :mstc_opinion %></div>
+  </div>
+  <div class="field">
+    <div><%= f.label :other %></div>
+    <span class='tip'>你可以在这里写字，使用 ASCII Art，贴照片链接，留密码，打广告……</span>
+    <div><%= f.text_area :other %></div>
+  </div>
+  <div class="actions">
+    <%= f.submit '确认提交' %>
+  </div>
+<% end %>

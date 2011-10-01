@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  tel: MyString
+  major: MyString
+  gender: 1
+  email: MyString
+  forum_id: MyString
+  og: false
+  cg: false
+  pg: false
+  self_intro: MyText
+  fav_soft: MyText
+  mstc_opinion: MyText
+  other: MyText
+  comments: MyText
+
+two:
+  name: MyString
+  tel: MyString
+  major: MyString
+  gender: 1
+  email: MyString
+  forum_id: MyString
+  og: false
+  cg: false
+  pg: false
+  self_intro: MyText
+  fav_soft: MyText
+  mstc_opinion: MyText
+  other: MyText
+  comments: MyText

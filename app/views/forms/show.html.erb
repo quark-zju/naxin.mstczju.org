@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+  <h3 class=<%= @form.gender == 1 ? 'male' : 'female' %>><%= @form.name %></h3>
+  <div>
+    <%= @form.gender == 1 ? '男' : '女' %>
+    <%= splitter %>
+    <%= @form.major %>
+    <%= splitter %>
+    <%= @form.tel %>
+    <%= splitter %>
+    <%= @form.email %>
+    <%= splitter %>
+    <%= @form.forum_id %>
+    <%= splitter %>
+    <%= @form.og ? 'OG ' : '' %>
+    <%= @form.cg ? 'CG ' : '' %>
+    <%= @form.pg ? 'PG ' : '' %>
+    <br />
+    创建于 <%= l @form.created_at %> 
+    <%= splitter %>
+    更新于 <%= l @form.updated_at %> 
+  </div>
+
+  <%  { '' => @form.self_intro, '喜爱的软件' => @form.fav_soft, '对 MSTC 的意见' => @form.mstc_opinion, '其他' => @form.other, '注释' => @form.comments }.each do |k, v| %> 
+    <% if v.present? %>
+      <%= k %>
+        <pre><%= v %></pre>
+    <% end %>
+  <% end %>
+
+<%= form_for(@form) do |f| %>
+  <div class="field">
+    <div><%= f.label :comments %></div>
+    <div><%= f.text_area :comments %></div>
+  </div>
+  <div class="actions">
+    <%= f.submit 'OK' %>
+  </div>
+<% end %>
+  
+
+<br />
+<%= link_to '返回', :back %>
