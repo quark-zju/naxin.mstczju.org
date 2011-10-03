@@ -32,7 +32,7 @@
   <%= hidden_field_tag :old_comments, @form.comments %>
   <div class="field">
     <div><%= f.label :comments, '新注释' %></div>
-    <div><%= f.text_area :comments %></div>
+    <div><%= f.text_area :comments, :style => 'height: 400px' %></div>
   </div>
   <div class="actions">
     <%= f.submit 'OK' %>

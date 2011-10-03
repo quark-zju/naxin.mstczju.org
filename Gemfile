@@ -8,6 +8,7 @@ gem 'rails', '3.1.0'
 gem 'sqlite3'
 gem 'client_side_validations'
 gem 'will_paginate', '3.0.0'
+gem 'nokogiri'
 
 
 # Gems used only for assets and not required
@@ -28,6 +29,8 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+gem 'pry'
 
 group :test do
   # Pretty printed test output

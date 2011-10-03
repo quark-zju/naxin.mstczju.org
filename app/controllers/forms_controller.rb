@@ -51,13 +51,14 @@ class FormsController < ApplicationController
     # check staff
     if staff?
       # smart update form according to legacy_comments
-      comments = String.new(@form.comments.to_s)
-      new_comments = params[:form][:comments]
+      comments = String.new(@form.comments.to_s).gsub("\r", '')
+      new_comments = params[:form][:comments].gsub("\r", '')
+      old_comments = params[:old_comments].gsub("\r",'')
 
-      if comments[params[:old_comments]]
-        comments.sub! params[:old_comments], new_comments
+      if comments[old_comments]
+        comments.sub! old_comments, new_comments
       else
-        comments << "\r\n-----\r\n#{new_comments}"
+        comments << "\n-----\n#{new_comments}"
       end
 
       if @form.update_attributes(comments: comments) 

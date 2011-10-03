@@ -13,7 +13,7 @@ class Form < ActiveRecord::Base
   attr_protected :cookie_hash
 
   def spam?
-    comments == 'spam'
+    comments.try { |c| c.start_with? 'spam' }
   end
 
 end
