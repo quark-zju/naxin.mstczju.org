@@ -10,7 +10,7 @@ class FormsController < ApplicationController
   def index
     @form = Form.find_by_id(cookies[:form_id]) if cookies[:form_id]
     @form = nil unless is_remembered?
-    @deadline_exceed = deadline?
+    @deadline_exceed = (Date.today > DEADLINE)
   end
 
   def new
