@@ -52,7 +52,7 @@ div.field_with_errors div.ui-effects-wrapper {
 // }
 
 textarea {
-  height: 8em;
+  height: 9em;
   width: 80%;
   border: 1px solid #ddd;
 }
@@ -72,31 +72,6 @@ hr {
   margin: 2em 0;
 }
 
-.block {
-  border: 1px solid #ddd;
-  margin-top: 10px;
-  padding: 0px 2px;
-}
-
-.splitter {
-  color: #ddd;
-}
-
-.male {
-  background-color:#729FCF;
-  color: white;
-}
-
-.female {
-  background-color:#AD7FA8;
-  color: white;
-}
-
-.spam {
-  background-color:#ddd;
-  color: white;
-}
-
 .error,
 .alert, 
 .notice,
@@ -112,3 +87,16 @@ hr {
 .info a			{ color: #205791; }
 
 h3 { padding: 2px; margin: 2px 0px; }
+
+#footer {
+  color: #777;
+  a, a:visited {
+    color: #777;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #444;
+    text-decoration: underline;
+    background: none;
+  }
+}
