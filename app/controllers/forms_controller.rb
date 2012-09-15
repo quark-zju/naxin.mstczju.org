@@ -3,10 +3,11 @@
 class FormsController < ApplicationController
 
   before_filter :before_deadline, :only => [ :new, :create ]
+  before_filter :filter_fields, :only => [ :update, :create ]
 
   def index
-    params[:page].try { |p| cookies[:page] = p.to_i > 0 ? p : 1 }
-    @forms = Form.order('id DESC').paginate(:page => cookies[:page], :per_page => 10) if staff?
+    # params[:page].try { |p| cookies[:page] = p.to_i > 0 ? p : 1 }
+    # @forms = Form.order('id DESC').paginate(:page => cookies[:page], :per_page => 10) if staff?
     @form = Form.find_by_id(cookies[:form_id]) if cookies[:form_id]
     @form = nil unless is_remembered?
     @deadline_exceed = deadline?
@@ -14,11 +15,11 @@ class FormsController < ApplicationController
 
   def show
     # only staff can view show page (and edit comments)
-    if staff?
-      @form = Form.find(params[:id])
-    else
+    # if staff?
+    #   @form = Form.find(params[:id])
+    # else
       redirect_to forms_url, flash: { error: '对不起，您不能这样做' }
-    end
+    # end
   end
 
   def new
@@ -27,7 +28,7 @@ class FormsController < ApplicationController
   end
 
   def edit
-    @form = Form.find(params[:id] || cookies[:form_id])
+    @form = Form.find(cookies[:form_id])
 
     unless is_remembered? 
       redirect_to forms_url, flash: { error: '对不起，您不能编辑这份报名表' }
@@ -46,68 +47,47 @@ class FormsController < ApplicationController
   end
 
   def update
-    @form = Form.find(params[:id] || cookies[:form_id])
+    @form = Form.find(cookies[:form_id])
     
-    # check staff
-    if staff?
-      # smart update form according to legacy_comments
-      comments = String.new(@form.comments.to_s).gsub("\r", '')
-      new_comments = params[:form][:comments].gsub("\r", '')
-      old_comments = params[:old_comments].gsub("\r",'')
-
-      if comments[old_comments]
-        comments.sub! old_comments, new_comments
-      else
-        comments << "\n-----\n#{new_comments}"
-      end
-
-      if @form.update_attributes(comments: comments) 
-        redirect_to forms_url, notice: '注释更新成功 :)'
+    # check belonging
+    if is_remembered?
+      if @form.update_attributes(params[:form])
+        redirect_to forms_url, notice: '报名表更新成功 :)'
       else
         render action: "edit"
       end
     else
-      # check belonging
-      if is_remembered?
-        params[:form].try { |p| p[:comments] = nil }
-        if @form.update_attributes(params[:form])
-          redirect_to forms_url, notice: '报名表更新成功 :)'
-        else
-          render action: "edit"
-        end
-      else
-        redirect_to forms_url, flash: { error: '对不起，现在不能编辑这份报名表，您可以重新填写一份新的报名表' }
-      end
+      redirect_to forms_url, flash: { error: '对不起，现在不能编辑这份报名表，您可以重新填写一份新的报名表' }
     end
   end
 
   def destroy
-    if staff?
-      @form = Form.find(params[:id])
-      @form.destroy
+    # if staff?
+    #   @form = Form.find(params[:id])
+    #   @form.destroy
 
-      redirect_to forms_url 
-    else
+    #   redirect_to forms_url 
+    # else
       redirect_to forms_url, flash: { error: '对不起，您不能这样做' }
-    end
+    # end
   end
 
   private
 
-  def staff?
-    if params[:staff] == 'yEs'
-      # set staff
-      session[:staff] = true
-      redirect_to forms_url, notice: '已获得 staff 身份'
-    elsif params[:staff]
-      # cancel staff
-      session[:staff] = nil
-    end
-    session[:staff] == true
-  end
+  # def staff?
+  #   if params[:staff] == 'yEs'
+  #     # set staff
+  #     session[:staff] = true
+  #     redirect_to forms_url, notice: '已获得 staff 身份'
+  #   elsif params[:staff]
+  #     # cancel staff
+  #     session[:staff] = nil
+  #   end
+  #   session[:staff] == true
+  # end
 
   def deadline?
-    Date.today > Date.civil(2011,9,30)
+    Date.today > Date.civil(Time.now.year,9,23)
   end
 
   def before_deadline
@@ -129,6 +109,11 @@ class FormsController < ApplicationController
 
   def random_hash
     rand.hash.abs.to_s(36)
+  end
+
+  def filter_fields
+    return if not params[:form]
+    [:comments, :state].each { |f| params[:form].delete f }
   end
 
 end

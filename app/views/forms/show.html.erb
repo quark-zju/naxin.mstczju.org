@@ -6,12 +6,15 @@
     <%= splitter %>
     <%= @form.major %>
     <%= splitter %>
+    <%= @form.campus == 1 ? '紫金港' : '玉泉' %>
+    <%= splitter %>
     <%= @form.tel %>
     <%= splitter %>
     <%= @form.email %>
     <%= splitter %>
     <%= @form.forum_id %>
     <%= splitter %>
+    <%= @form.tg ? 'TG ' : '' %>
     <%= @form.og ? 'OG ' : '' %>
     <%= @form.cg ? 'CG ' : '' %>
     <%= @form.pg ? 'PG ' : '' %>
@@ -21,7 +24,7 @@
     更新于 <%= l @form.updated_at %> 
   </div>
 
-  <%  { '' => @form.self_intro, '喜爱的软件' => @form.fav_soft, '对 MSTC 的意见' => @form.mstc_opinion, '其他' => @form.other, '注释' => @form.comments }.each do |k, v| %> 
+  <%  { '' => @form.q1, '报名原因' => @form.q2, '喜欢软件/生活设想/活动形式' => @form.q3, '其他' => @form.q4, '注释' => @form.comments }.each do |k, v| %> 
     <% if v.present? %>
       <%= k %>
         <pre class='wrap'><%= v %></pre>
@@ -32,7 +35,7 @@
   <%= hidden_field_tag :old_comments, @form.comments %>
   <div class="field">
     <div><%= f.label :comments, '新注释' %></div>
-    <div><%= f.text_area :comments, :style => 'height: 400px' %></div>
+    <div><%= text_area_tag :new_comments %></div>
   </div>
   <div class="actions">
     <%= f.submit 'OK' %>

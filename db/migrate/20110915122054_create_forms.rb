@@ -6,15 +6,25 @@ class CreateForms < ActiveRecord::Migration
       t.string :major
       t.integer :gender
       t.string :email
+      t.integer :campus
       t.string :forum_id
-      t.boolean :og
-      t.boolean :cg
-      t.boolean :pg
-      t.text :self_intro
-      t.text :fav_soft
-      t.text :mstc_opinion
-      t.text :other
+
+      t.integer :groups
+      # t.boolean :tg
+      # t.boolean :og
+      # t.boolean :cg
+      # t.boolean :pg
+
+      t.text :q1
+      t.text :q2
+      t.text :q3
+      t.text :q4
+
+      t.string :cookie_hash
+
       t.text :comments
+      t.integer :state
+      t.boolean :spam, :null => false, :default => false
 
       t.timestamps
     end

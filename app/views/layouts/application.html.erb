@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MSTC 纳新</title>
-  <%= stylesheet_link_tag    "application" %>
+  <title>浙江大学微软技术俱乐部 (MSTC) 纳新</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div id='header'>
+    <h1>浙江大学微软技术俱乐部 (MSTC) 纳新</h1>
+  </div>
 
   <div id='form_container'>
     <% flash.each do |key, value| %>
@@ -16,6 +19,6 @@
     <%= yield %>
   </div>
 
-  <p class='tip'>版权所有(C) 2011 浙江大学微软技术俱乐部</p>
+  <p class='tip'>版权所有(C) 2001-2012 浙江大学微软技术俱乐部</p>
 </body>
 </html>

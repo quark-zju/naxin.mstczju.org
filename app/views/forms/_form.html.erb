@@ -1,6 +1,7 @@
 <%= form_for(@form, :validate => true) do |f| %>
   <% if @form.errors.any? %>
     <div id="error_explanation">
+      <h2>发生了以下错误，请修改后再次提交</h2>
       <ul>
       <% @form.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -8,7 +9,6 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <div>
       <%= f.label :name %>
@@ -22,11 +22,16 @@
   </div>
   <div class="field">
     <div><%= f.label :major %></div>
-    <%= f.text_field :major %>
+    <span class='tip'>专业和年级，用空格分开。例如: <code>工科平台 <%= Time.now.strftime('%y') %></code></span>
+    <div><%= f.text_field :major %></div>
   </div>
   <div class="field">
     <div><%= f.label :gender %></div>
     <%= f.select :gender, options_for_select([ [ '男', 1 ], [ '女', 2 ] ], @form.gender) %>
+  </div>
+  <div class="field">
+    <div><%= f.label :campus %></div>
+    <%= f.select :campus, options_for_select([ [ '紫金港', 1 ], [ '玉泉', 2 ] ], @form.campus) %>
   </div>
   <div class="field">
     <div><%= f.label :email %></div>
@@ -35,41 +40,55 @@
   </div>
   <div class="field">
     <div><%= f.label :forum_id %></div>
-    <span class='tip'><%= link_to 'CC98', 'http://www.cc98.org', target: '_blank' %> 和 <%= link_to 'Freecity', 'http://freecity.cn', target: '_blank' %> 是学校内网的两个主要论坛</span>
+    <span class='tip'><%= link_to 'CC98', 'http://www.cc98.org', target: '_blank' %> 是校园内网主要论坛，是 MSTC Staff 线上交流的重要平台之一</span>
     <div><%= f.text_field :forum_id %></div>
   </div>
-  <p>勾选你感兴趣的 Group （可以多选）<br>
-  <span class='tip'>不知道如何选？可以看看<%= link_to '这里', about_url, :target => "_blank" %>的 MSTC 简介</span></p>
+  <p>勾选你感兴趣的 Group （可以多选，但不要超过两个）<br>
+  <span class='tip'>不知道如何选？请查看<%= link_to 'MSTC 简介中关于 Group 的介绍', "#{about_url}#groups", :target => "_blank" %></span></p>
+  <div class="field">
+    <%= f.check_box :tg %>
+    <%= f.label :tg, class: 'group_label' %>
+    <br/>
+    <span class='tip'>主要负责俱乐部的技术活动，如活动主讲人、参与 GIP 活动、代码编写与维护、参与微软的编程实践项目等</span>
+  </div>
   <div class="field">
     <%= f.check_box :og %>
-    <%= f.label :og %>
+    <%= f.label :og, class: 'group_label' %>
+    <br/>
+    <span class='tip'>主要负责俱乐部的日常运作事务，如活动总结、财务以及和微软亚洲研究院的沟通等</span>
   </div>
   <div class="field">
     <%= f.check_box :cg %>
-    <%= f.label :cg %>
+    <%= f.label :cg, class: 'group_label' %>
+    <br/>
+    <span class='tip'>主要负责俱乐部内的文化活动，如组织俱乐部内的吃喝玩乐、POM 活动等</span>
   </div>
   <div class="field">
     <%= f.check_box :pg %>
-    <%= f.label :pg %> 
+    <%= f.label :pg, class: 'group_label' %> 
+    <br/>
+    <span class='tip'>主要负责俱乐部的宣传，如海报、传单、刊物的制作等</span>
+  </div>
+  <hr />
+  <div class="field">
+      <span class='tip'>以下内容请<strong>尽可能详细填写</strong>，以便让我们在面试前更好的了解你！</span>
   </div>
   <div class="field">
-    <div><%= f.label :self_intro %></div>
-    <%= f.text_area :self_intro %>
+    <div><%= f.label :q1 %></div>
+    <%= f.text_area :q1 %>
   </div>
   <div class="field">
-    <div><%= f.label :fav_soft %></div>
-    <span class='tip'>你可以从技术或者非技术的角度任意回答，并不必局限于微软</span>
-    <div><%= f.text_area :fav_soft %></div>
+    <div><%= f.label :q2 %></div>
+    <div><%= f.text_area :q2 %></div>
   </div>
   <div class="field">
-    <div><%= f.label :mstc_opinion %></div>
-    <span class='tip'>MSTC 现有活动可参考<%= link_to '这里', about_url, :target => "_blank" %>的介绍</span>
-    <div><%= f.text_area :mstc_opinion %></div>
+    <div><%= f.label :q3 %></div>
+    <div><%= f.text_area :q3 %></div>
   </div>
   <div class="field">
-    <div><%= f.label :other %></div>
-    <span class='tip'>你可以在这里写字，使用 ASCII Art，贴照片链接，留密码，打广告……</span>
-    <div><%= f.text_area :other %></div>
+    <div><%= f.label :q4 %></div>
+    <span class='tip'>你可以在这里写字，使用 ASCII Art，贴照片链接，留密码，打广告... 如果你报名了 PG，你也可以在这里附上一些你之前作品的 URL 地址</span>
+    <div><%= f.text_area :q4 %></div>
   </div>
   <div class="actions">
     <%= f.submit '确认提交' %>

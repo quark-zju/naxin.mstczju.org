@@ -1,65 +1,16 @@
-<% if @forms %>
-<h1>报名表列表</h1>
-<%= link_to '取消 staff 身份', '/unstaff' %>
-<%= link_to_function '切换自动折行', '$("pre").toggleClass("wrap");' %>
-
-<%= will_paginate @forms %>
-
-<% @forms.each do |form| %>
-  <div class='block'>
-    <h3 class=<%= form.spam? ? 'spam' : (form.gender == 1 ? 'male' : 'female') %>><%= form.name %></h3>
-    <span style='float:right;'><%= link_to '[详细]', form %></span>
-    <% if form.spam? %>
-      <span style='color:#ddd;'>此报名表已被标记为 Spam</span>
-    <% else %>
-      <div>
-        <%= form.gender == 1 ? '男' : '女' %>
-        <%= splitter %>
-        <%= form.major %>
-        <%= splitter %>
-        <%= form.tel %>
-        <%= splitter %>
-        <%= form.email %>
-        <%= splitter %>
-        <%= form.forum_id %>
-        <%= splitter %>
-        <%= form.og ? 'OG ' : '' %>
-        <%= form.cg ? 'CG ' : '' %>
-        <%= form.pg ? 'PG ' : '' %>
-        <%= splitter %>
-        <%= l(form.created_at) %> 
-      </div>
-
-      <%  { '' => form.self_intro, '喜爱的软件' => form.fav_soft, '对 MSTC 的意见' => form.mstc_opinion, '其他' => form.other, [ 'Staff 注释', 'comments' ] => form.comments }.each do |k, v| %> 
-        <% k, c = *k if k.is_a? Array %>
-        <% if v.present? %>
-          <%= k %>
-          <pre class='wrap<%= " #{c}" if c.present? %>'><%= v %></pre>
-        <% end %>
-      <% end %>
-      <!-- td><%= link_to 'Destroy', form, confirm: 'Are you sure?', method: :delete %></td -->
-    <% end # form.spam? %>
-  </div>
-<% end %>
-
-<%= will_paginate @forms %>
-
-<% else %>
-  <h2>感谢您对 MSTC 的关注，您现在可以</h2>
-  <ul>
-    <li> <%= link_to '看看 MSTC 的简介', about_url %></li>
-    <% if @form %>
-      <li> <%= link_to '再改改我的报名表', edit_form_url(@form) %> </li>
-      <% unless @deadline_exceed %>
-        <li> <%= link_to '填写一份新的报名表', new_form_url(), confirm: '注意：填写新的报名表并提交成功后将导致无法修改旧的报名表，确认要继续填写吗？' %> </li>
-      <% end %>
-    <% else %>
-      <% unless @deadline_exceed %>
-        <li> <%= link_to '填写一份新的报名表', new_form_url() %> </li>
-      <% end %>
+<h2>感谢您对 MSTC 的关注，您现在可以</h2>
+<ul>
+  <li> <%= link_to '看看 MSTC 的简介', about_url %></li>
+  <% if @form %>
+    <li> <%= link_to '再改改我的报名表', edit_self_forms_path %> </li>
+    <% unless @deadline_exceed %>
+      <li> <%= link_to '填写一份新的报名表', new_form_url(), confirm: '注意：填写新的报名表并提交成功后将导致无法修改旧的报名表，确认要继续填写吗？' %> </li>
     <% end %>
-    <li> <%= link_to '去 CC98 MSTC 版面灌水（需要内网）', 'http://www.cc98.org/list.asp?boardid=60' %></li>
-    <li>确认无误后，直接关闭这个页面</li>
-  </ul>
-<% end %>
-
+  <% else %>
+    <% unless @deadline_exceed %>
+      <li> <%= link_to '填写一份新的报名表', new_form_url() %> </li>
+    <% end %>
+  <% end %>
+  <li> <%= link_to '去 CC98 MSTC 版面灌水（需要内网）', 'http://www.cc98.org/list.asp?boardid=60' %></li>
+  <li>确认无误后，直接关闭这个页面即可</li>
+</ul>

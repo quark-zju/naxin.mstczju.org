@@ -2,7 +2,7 @@
 
 <% if @last_form %>
   <div class='flash info'>
-    我们发现您之前已经填过了一份报名表，如果您需要编辑之前填写的报名表而不是新填写一份报名表的话，请<%= link_to '点击这里', edit_form_url(@last_form) %>
+    我们发现您之前已经填过了一份报名表，如果您需要编辑之前填写的报名表而不是新填写一份报名表的话，请<%= link_to '点击这里', edit_self_forms_path %>
   </div>
 <% end %>
 
