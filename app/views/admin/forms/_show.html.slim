@@ -58,19 +58,18 @@ br
                   - if @form.state.include? "#{g}_#{st}".downcase.to_sym
                     - html_opt = { :class => 'disabled', :disabled => 'disabled' }
                   = button_to st.upcase, {:controller => 'admin/forms', :action => "#{g}_#{st}".downcase}, html_opt
-    .panel_contents
-      table
-        thead
-          tr
-            th WHO
-            th WHAT
-            th WHEN
-        tbody
-        - @form.admin_comments(:state).order('id DESC').each do |c|
-          tr
-            td = c.author.name
-            td = c.body
-            td = l c.created_at
-      
-
-  
+    / History
+    - if  @form.admin_comments(:state).limit(1).count > 0
+      .panel_contents
+        table
+          thead
+            tr
+              th WHO
+              th WHAT
+              th WHEN
+          tbody
+          - @form.admin_comments(:state).order('id DESC').each do |c|
+            tr
+              td = c.author.name
+              td = c.body
+              td = l c.created_at
