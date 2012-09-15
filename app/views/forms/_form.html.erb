@@ -43,8 +43,8 @@
     <span class='tip'><%= link_to 'CC98', 'http://www.cc98.org', target: '_blank' %> 是校园内网主要论坛，是 MSTC Staff 线上交流的重要平台之一</span>
     <div><%= f.text_field :forum_id %></div>
   </div>
-  <p>勾选你感兴趣的 Group （可以多选，但不要超过两个。在目标明确的情况下，我们推荐只选一个）<br>
-  <span class='tip'>不知道如何选？请查看<%= link_to 'MSTC 简介中关于 Group 的介绍', "#{about_url}#groups", :target => "_blank" %></span></p>
+  <p>勾选你感兴趣的 Group<br> 
+  <span class='tip'>可以多选，但不要超过两个。在目标明确的情况下，我们推荐只选一个<br>不知道如何选？请查看<%= link_to 'MSTC 简介中关于 Group 的介绍', "#{about_url}#groups", :target => "_blank" %></span></p>
   <div class="field">
     <%= f.check_box :tg %>
     <%= f.label :tg, class: 'group_label' %>
