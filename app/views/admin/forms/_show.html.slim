@@ -14,16 +14,27 @@
   = splitter
   = @form.tel
   = splitter
-  = @form.email
+  = link_to @form.email, "mailto:#{@form.email}"
   = splitter
   - if @form.forum_id.present?
     = link_to @form.forum_id.to_s, "http://www.cc98.org/dispuser.asp?name=#{@form.forum_id}", target: '_blank'
     = splitter
   = l @form.created_at
+
   - { '' => @form.q1, '报名原因' => @form.q2, '喜欢软件/生活设想/活动形式' => @form.q3, '其他' => @form.q4, '注释' => @form.comments }.each do |k, v| 
     - if v.present?
       = k
       pre.wrap = v
+
+div.block
+  - form_next = Form.nospam.where('ID < ?', [@form.id]).order('ID DESC').first
+  - if form_next
+    = link_to "下一个: #{form_next.name}", admin_form_path(form_next), class: 'rfloat'
+  - form_prev = Form.nospam.where('ID > ?', [@form.id]).order('ID ASC').first
+  - if form_prev
+    = link_to "上一个: #{form_prev.name}", admin_form_path(form_prev)
+  - else
+    p 
 br
 .form.panel
   h3 Actions

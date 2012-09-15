@@ -35,6 +35,10 @@ class Form < ActiveRecord::Base
     [nil, 'zjg', 'yq'][campus]
   end
 
+  def self.nospam
+    where(:spam => false).scoped
+  end
+
   private
 
   def check_groups
