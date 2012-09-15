@@ -1,0 +1,15 @@
+---
+environment: production
+timeout: 30
+log: log/thin.log
+pid: tmp/pids/thin.pid
+max_conns: 51200
+max_persistent_conns: 512
+require: []
+wait: 30
+address: 0.0.0.0
+port: 5000
+servers: 2
+daemonize: true
+onebyone: true
+

@@ -1,0 +1,203 @@
+// SASS variable overrides must be declared before loading up Active Admin's styles.
+//
+// To view the variables that Active Admin provides, take a look at
+// `app/assets/stylesheets/active_admin/mixins/_variables.css.scss` in the
+// Active Admin source.
+//
+// For example, to change the sidebar width:
+// $sidebar-width: 242px;
+
+// Active Admin's got SASS!
+@import "active_admin/mixins";
+@import "active_admin/base";
+
+body.active_admin {
+  #collection_selection_toggle_panel {
+    display: none;
+  }
+  .部门, .groups {
+    min-width: 40px;
+    width: 40px;
+  }
+  .姓名, .name {
+    min-width: 60px;
+    width: 60px;
+  }
+  .状态, .state {
+    min-width: 60px;
+  }
+  .group_tag {
+    color: white;
+    background-color: #888a85;
+    padding: 2px 4px;
+    border-radius: 3.5px;
+  }
+
+  span.rejected {
+    background-color: #cc0000;
+  }
+  span.accepted {
+    background-color: #73d216;
+  }
+  span.pending {
+    background-color: #edd400;
+  }
+  span.zjg {
+    background-color: #728fcf;
+  }
+  span.yq {
+    background-color: #204a87;
+  }
+
+
+  .male, .female {
+    a, a:hover, a:visited, a:active {
+      border-radius: 2px;
+      color: white;
+      padding: 2px 4px;
+      text-decoration: none;
+    }
+  }
+
+  span.male {
+    a, a:hover, a:visited {
+      background-color:#729FCF;
+    }
+    a:hover {
+      box-shadow: 0 0 5px #729FCF;
+      // border-radius: 0;
+      // outline: 2px solid #729FCF;
+    }
+  }
+
+  span.female {
+    a, a:hover, a:visited {
+      background-color:#AD7FA8;
+    }
+    a:hover {
+      box-shadow: 0 0 5px #AD7FA8;
+      // border-radius: 0;
+      // outline: 2px solid 
+    }
+  }
+
+  span.tg {
+    background-color: #3465a4;
+  }
+  span.cg {
+    background-color: #4e9a06;
+  }
+  span.og {
+    background-color: #f57900;
+  }
+  span.pg {
+    background-color: #75507b;
+  }
+
+}
+
+body.active_admin div.block {
+  color: #333;
+  font-family: 微软雅黑, Microsoft YaHei, SimSun, Arial, Verdana, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+
+  border: 1px solid #ddd;
+  margin: 10px 0 0 0;
+
+  .rfloat {
+    float: right;
+  }
+
+  span.group_tag {
+    padding: 0px 4px;
+    margin: 2px;
+    font-size: 70%;
+  }
+
+  h3 { padding: 2px; margin: 2px 0px; }
+
+  div {
+    margin: 0;
+    padding: 0;
+  }
+
+  .message {
+    margin-left: 10px;
+    background-color: #faa;
+    border: 1px solid red;
+  }
+  
+  padding: 0px 2px;
+  .splitter {
+    padding-left: 4px;
+    padding-right: 4px;
+    color: #ddd;
+  }
+
+  .male {
+    background-color:#729FCF;
+    color: white;
+  }
+
+  .female {
+    background-color:#AD7FA8;
+    color: white;
+  }
+
+  .spam {
+    background-color:#ddd;
+    color: white;
+  }
+
+  p, ol, ul, td {
+    font-size: 13px;
+    line-height: 18px; }
+  
+  pre {
+    background-color: #eee;
+    padding: 6px;
+    margin: 0px 0px 2px;
+    overflow: auto;
+    font-size: 13px;
+    &.comments {
+      background: #FFF6BF;
+    }
+    &.wrap {
+      white-space: pre-wrap;       /* css-3 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */ } }
+  
+  a {
+    color: #0C7823;
+    &:visited {
+      color: #0C7823; }
+    &:hover {
+      color: #fff;
+      background-color:#0C7823; } }
+  
+  div {
+    &.field, &.actions {
+      margin-bottom: 10px; } }
+  
+}
+
+
+// Overriding any non-variable SASS must be done after the fact.
+// For example, to change the default status-tag color:
+//
+//   body.active_admin {
+//      .status_tag { background: #6090DB; }
+//   }
+//
+// Notice that Active Admin CSS rules are nested within a
+// 'body.active_admin' selector to prevent conflicts with
+// other pages in the app. It is best to wrap your changes in a 
+// namespace so they are properly recognized. You have options
+// if you e.g. want different styles for different namespaces:
+//
+// .active_admin       applies to any Active Admin namespace
+// .admin_namespace    applies to the admin namespace (eg: /admin)
+// .other_namespace    applies to a custom namespace named other (eg: /other)

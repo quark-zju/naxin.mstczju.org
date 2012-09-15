@@ -1,0 +1,114 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+.message {
+  margin-left: 10px;
+  background-color: #faa;
+  border: 1px solid red;
+}
+
+div.field_with_errors div.ui-effects-wrapper {
+  padding: 0px;
+  margin: 0px;
+  display: inline-block !important;
+}
+
+.tip {
+  color: #777;
+}
+
+#header {
+  margin: 0px auto;
+  padding: 20px 40px 0 40px;
+  color: #555753;
+  width: 640px;
+  h1 {
+    font-weight: normal;
+  }
+}
+
+#form_container {
+  background: #fefefe;
+  margin: 40px auto;
+  padding: 20px 40px;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.4);
+  text-align: left;
+  width: 640px;
+}
+
+// .group_label {
+//   width: 20%;
+//   display: inline-block;
+// }
+
+textarea {
+  height: 8em;
+  width: 80%;
+  border: 1px solid #ddd;
+}
+
+input[type=text] {
+  border: 1px solid #ddd;
+}
+
+textarea:active, input[type=text]:active {
+  border: 1px solid #73d216;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: #DDD;
+  margin: 2em 0;
+}
+
+.block {
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  padding: 0px 2px;
+}
+
+.splitter {
+  color: #ddd;
+}
+
+.male {
+  background-color:#729FCF;
+  color: white;
+}
+
+.female {
+  background-color:#AD7FA8;
+  color: white;
+}
+
+.spam {
+  background-color:#ddd;
+  color: white;
+}
+
+.error,
+.alert, 
+.notice,
+.success, 
+.info 			{ padding: 0.8em; margin-bottom: 1em; border: 2px solid #ddd; }
+.error, .alert { background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
+.notice     { background: #fff6bf; color: #514721; border-color: #ffd324; }
+.success    { background: #e6efc2; color: #264409; border-color: #c6d880; }
+.info 			{ background: #d5edf8; color: #205791; border-color: #92cae4; }
+.error a, .alert a { color: #8a1f11; }
+.notice a   { color: #514721; }
+.success a  { color: #264409; }
+.info a			{ color: #205791; }
+
+h3 { padding: 2px; margin: 2px 0px; }

@@ -1,0 +1,43 @@
+.block
+  h3 class="#{@form.gender == 1 ? 'male' : 'female'}" = @form.name
+  - @form.groups.sort.each do |s|
+    span class="#{s.downcase} group_tag" = s.upcase
+  = splitter
+  - @form.state.each do |s|
+    - name, klass = s.to_s.split('_') 
+    span class="group_tag #{klass}" = name.upcase
+  = splitter
+  - name = @form.campus == 1 ? 'zjg' : 'yq'
+  span class="group_tag #{@form.campus_str}"  = @form.campus_str.upcase
+  = splitter
+  = @form.major
+  = splitter
+  = @form.tel
+  = splitter
+  = @form.email
+  = splitter
+  - if @form.forum_id.present?
+    = link_to @form.forum_id.to_s, "http://www.cc98.org/dispuser.asp?name=#{@form.forum_id}", target: '_blank'
+    = splitter
+  = l @form.created_at
+  - { '' => @form.q1, '报名原因' => @form.q2, '喜欢软件/生活设想/活动形式' => @form.q3, '其他' => @form.q4, '注释' => @form.comments }.each do |k, v| 
+    - if v.present?
+      = k
+      pre.wrap = v
+br
+.form.panel
+  h3 Actions
+  .panel_contents
+    table
+      tbody
+        - @form.groups.each do |g|
+          tr
+            td = g.upcase
+            - Form::STATES.each do |st|
+              td
+                /.action.input_action style='display: inline'
+                - html_opt = {} 
+                - if @form.state.include? "#{g}_#{st}".downcase.to_sym
+                  - html_opt = { :class => 'disabled', :disabled => 'disabled' }
+                = button_to st.upcase, {:controller => 'admin/forms', :action => "#{g}_#{st}".downcase}, html_opt
+

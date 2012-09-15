@@ -2,6 +2,8 @@
 #
 class FormsController < ApplicationController
 
+  DEADLINE = Date.civil(Time.now.year, 9, 23)
+
   before_filter :before_deadline, :only => [ :new, :create ]
   before_filter :filter_fields, :only => [ :update, :create ]
 
@@ -86,12 +88,9 @@ class FormsController < ApplicationController
   #   session[:staff] == true
   # end
 
-  def deadline?
-    Date.today > Date.civil(Time.now.year,9,23)
-  end
 
   def before_deadline
-    if deadline?
+    if Date.today > DEADLINE
       redirect_to forms_url, notice: '本次纳新报名已截止，欢迎关注 MSTC 的其他活动'
     end
   end
