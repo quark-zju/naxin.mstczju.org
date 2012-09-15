@@ -35,6 +35,38 @@ class Form < ActiveRecord::Base
     [nil, 'zjg', 'yq'][campus]
   end
 
+  def admin_comments(namespace = :admin)
+    ActiveAdmin::Comment.find_for_resource_in_namespace(self, namespace).scoped
+  end
+
+  def create_admin_comment!(author, body, namespace = :admin)
+    comment = ActiveAdmin::Comment.new(body: body, resource: self, namespace: namespace)
+    comment.author = author
+    comment.save!
+  end
+
+  def update_state!(group, sym, staff)
+    return if not staff
+
+    if sym.nil? && group.nil?
+      message   = '清除所有状态'
+      new_state = []
+    elsif group.nil?
+      message   = "修改为 #{sym.to_s.upcase}"
+      new_state = self.groups.map {|g| "#{g}_#{sym}".downcase.to_sym }
+    else
+      message   = "修改 #{group.to_s.upcase} 状态为 #{sym.to_s.upcase}"
+      new_state = self.state.reject{|s| s.to_s.start_with?(group.to_s)} + ["#{group.to_s}_#{sym}".downcase.to_sym]
+    end
+
+    return if new_state.sort == state.sort
+    transaction do
+      self.state = new_state
+      self.save
+      self.create_admin_comment!(staff, message, :state)
+    end
+  end
+
   def self.nospam
     where(:spam => false).scoped
   end

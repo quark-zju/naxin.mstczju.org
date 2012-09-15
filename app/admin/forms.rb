@@ -39,7 +39,7 @@ ActiveAdmin.register Form do
     end
     column :tel, :sortable => false
     column :comments do |f|
-      c = ActiveAdmin::Comment.find_for_resource_in_namespace(f, :admin).count
+      c = f.admin_comments.count
       c > 0 ? c : ''
     end
     column :state, :sortable => :state do |f|
@@ -72,9 +72,7 @@ ActiveAdmin.register Form do
   Form::STATES.each_with_index do |st, i|
     batch_action "#{st.upcase}", :priority => i do |selection|
       Form.find(selection).each do |f|
-        f.state = f.groups.map{|g| "#{g}_#{st}".to_sym }
-        # f.state = f.state.reject{|s| s.to_s.start_with? g} + ["#{g}_#{st}".to_sym]
-        f.save
+        current_staff.update_form_state!(f, nil, st)
       end
       redirect_to :back
     end
@@ -84,23 +82,20 @@ ActiveAdmin.register Form do
     g, st = *gst
     batch_action "#{g.upcase} #{st.upcase}", :priority => 100+i do |selection|
       Form.find(selection).each do |f|
-        f.state = f.state.reject{|s| s.to_s.start_with?(g.to_s)} + ["#{g}_#{st}".to_sym]
-        f.save
+        current_staff.update_form_state!(f, g, st)
       end
       redirect_to :back
     end
     member_action "#{g}_#{st}".to_sym, :method => :post  do
       f = Form.find(params[:id])
-      f.state = f.state.reject{|s| s.to_s.start_with?(g.to_s)} + ["#{g}_#{st}".to_sym]
-      f.save
+      current_staff.update_form_state!(f, g, st)
       redirect_to :back
     end
   end
 
   batch_action "CLEAN STATE", :priority => 10 do |selection|
     Form.find(selection).each do |f|
-      f.state = []
-      f.save
+      current_staff.update_form_state!(f, nil, nil)
     end
     redirect_to :back
   end

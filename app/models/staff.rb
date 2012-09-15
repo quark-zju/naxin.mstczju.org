@@ -16,6 +16,10 @@ class Staff < ActiveRecord::Base
     Form.where(:spam => false).order('id DESC').scoped
   end
 
+  def update_form_state!(form, group, sym)
+    form.update_state! group, sym, self
+  end
+
   # used by devise_mstc
   def self.email_postfix
     '@mstczju.org'
