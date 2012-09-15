@@ -1,6 +1,9 @@
 ActiveAdmin.register Form do
   actions :all, :except => [:destroy, :edit, :new, :create, :update]
 
+  # Strict scope
+  # scope_to :current_staff
+
   config.filters = false
 
   # filter :name
@@ -59,6 +62,7 @@ ActiveAdmin.register Form do
   end
 
   controller do
+    # not strict scope, users can skip this scope by specifing id
     def scoped_collection
       Form.where(:spam => false).order('ID DESC')
     end

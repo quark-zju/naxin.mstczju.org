@@ -12,6 +12,9 @@ class Staff < ActiveRecord::Base
     name.presence || nick.presence || email.gsub(/@.*$/, '')
   end
 
+  def forms
+    Form.where(:spam => false).order('id DESC').scoped
+  end
 
   # used by devise_mstc
   def self.email_postfix
