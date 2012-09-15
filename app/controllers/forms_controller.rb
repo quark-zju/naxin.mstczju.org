@@ -8,20 +8,9 @@ class FormsController < ApplicationController
   before_filter :filter_fields, :only => [ :update, :create ]
 
   def index
-    # params[:page].try { |p| cookies[:page] = p.to_i > 0 ? p : 1 }
-    # @forms = Form.order('id DESC').paginate(:page => cookies[:page], :per_page => 10) if staff?
     @form = Form.find_by_id(cookies[:form_id]) if cookies[:form_id]
     @form = nil unless is_remembered?
     @deadline_exceed = deadline?
-  end
-
-  def show
-    # only staff can view show page (and edit comments)
-    # if staff?
-    #   @form = Form.find(params[:id])
-    # else
-      redirect_to forms_url, flash: { error: '对不起，您不能这样做' }
-    # end
   end
 
   def new
@@ -63,31 +52,7 @@ class FormsController < ApplicationController
     end
   end
 
-  def destroy
-    # if staff?
-    #   @form = Form.find(params[:id])
-    #   @form.destroy
-
-    #   redirect_to forms_url 
-    # else
-      redirect_to forms_url, flash: { error: '对不起，您不能这样做' }
-    # end
-  end
-
   private
-
-  # def staff?
-  #   if params[:staff] == 'yEs'
-  #     # set staff
-  #     session[:staff] = true
-  #     redirect_to forms_url, notice: '已获得 staff 身份'
-  #   elsif params[:staff]
-  #     # cancel staff
-  #     session[:staff] = nil
-  #   end
-  #   session[:staff] == true
-  # end
-
 
   def before_deadline
     if Date.today > DEADLINE
