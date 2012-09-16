@@ -4,7 +4,7 @@ class FormsController < ApplicationController
 
   DEADLINE = Date.civil(Time.now.year, 9, 23)
 
-  before_filter :before_deadline, :only => [ :new, :create ]
+  before_filter :before_deadline, :only => [ :new, :create, :update, :edit ]
   before_filter :filter_fields, :only => [ :update, :create ]
 
   def index
