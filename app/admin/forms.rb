@@ -1,6 +1,12 @@
 ActiveAdmin.register Form do
   actions :all, :except => [:destroy, :edit, :new, :create, :update]
 
+  scope :all, :default => true
+  scope :accepted #, :show_count => false
+  scope :pending
+  scope :rejected
+  scope :other
+
   # Strict scope
   # scope_to :current_staff
 
@@ -17,8 +23,11 @@ ActiveAdmin.register Form do
   # filter :spam
   # filter :state
 
+  # overwrites order, otherwise ActiveAdmin will append many ugly params
+  # order logic exists in controller's scoped_collection
+  config.sort_order = ''
+
   config.batch_actions = true
-  config.sort_order = 'spam ASC, id DESC'
   config.per_page   = 100
 
   index do
@@ -48,9 +57,6 @@ ActiveAdmin.register Form do
         span(:class =>"group_tag #{klass}") { name[0].upcase }
       end.join(' ')
     end
-    # column :spam, :sortable => :spam do |f|
-    #   f.spam ? 'Y' : 'N'
-    # end
     # default_actions
   end
 
@@ -62,9 +68,10 @@ ActiveAdmin.register Form do
   end
 
   controller do
-    # not strict scope, users can skip this scope by specifing id
+    # not strict scope, users can access an element directly
+    # use scoped_to to restrict access
     def scoped_collection
-      Form.where(:spam => false).order('ID DESC')
+      Form.nospam.order('ID DESC')
     end
   end
 

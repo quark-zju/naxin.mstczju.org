@@ -25,7 +25,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "统计" do
           counts = Hash[[*Form::GROUPS, 'all'].map {|s| [s.to_sym, {}]}]
 
-          Form.where(:spam => false).each do |f|
+          Form.nospam.each do |f|
             state_groups = []
             person_state = []
 
@@ -53,14 +53,14 @@ ActiveAdmin.register_page "Dashboard" do
             table do
               thead do
                 tr do
-                  ['', *Form::STATES, :other].map { |s| th { s.upcase } }
+                  ['', *Form::STATES.sort, :other].map { |s| th { s.upcase } }
                 end
               end
               tbody do
                 [*Form::GROUPS, :all].map do |g|
                   tr do
                     td { b { g.upcase } }
-                    [*Form::STATES, :other].map { |s| td { counts[g][s] } }
+                    [*Form::STATES.sort, :other].map { |s| td { counts[g][s] } }
                   end
                 end
               end

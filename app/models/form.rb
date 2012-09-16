@@ -67,8 +67,35 @@ class Form < ActiveRecord::Base
     end
   end
 
-  def self.nospam
-    where(:spam => false).scoped
+  # scopes
+  class << self
+    def nospam
+      where(:spam => false).scoped
+    end
+
+    STATES.each do |st|
+      define_method st do
+        with_any_state(*GROUPS.map{|g| "#{g}_#{st}".to_sym}).scoped
+      end
+    end
+
+    def accepted
+      with_any_state(*GROUPS.map{|g| "#{g}_accepted".to_sym}).scoped
+    end
+
+    def rejected
+      without_state(*([:accepted, :pending].map{|st| GROUPS.map{|g| "#{g}_#{st}".to_sym}}.flatten)) \
+      .with_any_state(*GROUPS.map{|g| "#{g}_rejected".to_sym}).scoped
+    end
+
+    def pending
+      without_state(*([:accepted].map{|st| GROUPS.map{|g| "#{g}_#{st}".to_sym}}.flatten)) \
+      .with_any_state(*GROUPS.map{|g| "#{g}_pending".to_sym}).scoped
+    end
+
+    def other
+      without_state.scoped
+    end
   end
 
   private
