@@ -10,6 +10,7 @@ gem 'activeadmin', '~> 0.5.0'
 gem "meta_search", '~> 1.1.3'
 gem 'backtrace_shortener', '~> 0.1.0'
 gem 'slim', '~> 1.3.0'
+gem 'useragent'
 
 group :development do
   gem 'pry'

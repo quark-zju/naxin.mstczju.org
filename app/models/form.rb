@@ -28,8 +28,8 @@ class Form < ActiveRecord::Base
 
   # attr_protected :cookie_hash
 
-  attr_accessible :campus, :cg, :comments, :cookie_hash, :created_at, :email, :forum_id, :gender, :id, :major, :name, :og, :pg, :q1, :q2, :q3, :q4, :groups, :tel, :tg, :updated_at, :as => :admin
-  attr_accessible :campus, :cg, :email, :forum_id, :gender, :major, :name, :og, :pg, :q1, :q2, :q3, :q4, :tel, :tg, :groups
+  attr_accessible :campus, :cg, :comments, :cookie_hash, :created_at, :email, :forum_id, :gender, :id, :major, :name, :og, :pg, :q1, :q2, :q3, :q4, :groups, :tel, :tg, :updated_at, :user_agent, :as => :admin
+  attr_accessible :campus, :cg, :email, :forum_id, :gender, :major, :name, :og, :pg, :q1, :q2, :q3, :q4, :tel, :tg, :groups, :user_agent
 
   def campus_str
     [nil, 'zjg', 'yq'][campus]

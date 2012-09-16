@@ -28,6 +28,7 @@ class FormsController < ApplicationController
 
   def create
     @form = Form.new(params[:form])
+    @form.user_agent = request.env['HTTP_USER_AGENT']
 
     if @form.save
       remember
