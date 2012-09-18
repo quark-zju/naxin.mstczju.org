@@ -5,7 +5,7 @@ class Form < ActiveRecord::Base
   STATES = [:pending, :accepted, :rejected]
 
   bitmask :groups, :as => GROUPS
-  bitmask :state, :as => (GROUPS.product(STATES).map {|s| s.join('_').to_sym})
+  bitmask :state, :as => (GROUPS.product(STATES).map {|s| s.join('_').to_sym}) + [:duplicated]
 
   GROUPS.each do |g|
     define_method(g) { groups.include? g }
@@ -31,8 +31,12 @@ class Form < ActiveRecord::Base
   attr_accessible :campus, :cg, :comments, :cookie_hash, :created_at, :email, :forum_id, :gender, :id, :major, :name, :og, :pg, :q1, :q2, :q3, :q4, :groups, :tel, :tg, :updated_at, :user_agent, :as => :admin
   attr_accessible :campus, :cg, :email, :forum_id, :gender, :major, :name, :og, :pg, :q1, :q2, :q3, :q4, :tel, :tg, :groups, :user_agent
 
-  def campus_str
-    [nil, 'zjg', 'yq'][campus]
+  def campus_sym
+    [nil, :zjg, :yq][campus]
+  end
+
+  def gender_sym
+    spam ? :spam : (gender == 1 ? :male : :female)
   end
 
   def admin_comments(namespace = :admin)

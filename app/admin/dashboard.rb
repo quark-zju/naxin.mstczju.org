@@ -29,7 +29,7 @@ ActiveAdmin.register_page "Dashboard" do
             state_groups = []
             person_state = []
 
-            f.state.each do |gst|
+            f.state.select{|t| t.to_s['_']}.each do |gst|
               g, st = gst.to_s.split('_').map(&:to_sym)
               counts[g][st] ||= 0
               counts[g][st] += 1

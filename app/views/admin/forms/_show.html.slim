@@ -1,18 +1,13 @@
 .block
+  h3 class="#{@form.gender_sym}" = @form.name
   - if @form.spam
-    h3.spam = @form.name
-    span 此报名表已被标记为 Spam
+    span 此报名表已被鉴定为灌水而可以忽略
   - else
-    h3 class="#{@form.gender == 1 ? 'male' : 'female'}" = @form.name
-    - @form.groups.sort.each do |s|
-      span class="#{s.downcase} group_tag" = s.upcase
+    = draw_tags @form.groups.sort, false
     = splitter
-    - @form.state.each do |s|
-      - name, klass = s.to_s.split('_') 
-      span class="group_tag #{klass}" = name.upcase
+    = draw_tags @form.state.sort, false
     = splitter
-    - name = @form.campus == 1 ? 'zjg' : 'yq'
-    span class="group_tag #{@form.campus_str}"  = @form.campus_str.upcase
+    = draw_tags [@form.campus_sym]
     = splitter
     = @form.major
     = splitter

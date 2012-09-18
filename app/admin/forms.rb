@@ -1,4 +1,5 @@
 ActiveAdmin.register Form do
+
   actions :all, :except => [:destroy, :edit, :new, :create, :update]
 
   scope :all, :default => true
@@ -34,17 +35,17 @@ ActiveAdmin.register Form do
     selectable_column
   
     column :name, :sortable => :name do |f|
-      span(:class =>(f.spam ? 'spam' : (f.gender  == 1 ? 'male' : 'female'))) { link_to f.name, admin_form_path(f) }
+      span(:class => f.gender_sym) { link_to f.name, admin_form_path(f) }
     end
     column :groups, :sortable => :groups do |f|
-      f.groups.sort.map{|s| span(class:"#{s.downcase} group_tag"){s[0].upcase}}.join(' ')
+      draw_tags f.groups.sort
     end
     column :major
     column :forum_id do |f|
       link_to f.forum_id.to_s, "http://www.cc98.org/dispuser.asp?name=#{f.forum_id}", target: '_blank'
     end
     column :campus, :sortable => :campus do |f|
-      span(class:"group_tag #{f.campus_str}") { f.campus_str.upcase }
+      draw_tags [f.campus_sym], false
     end
     column :tel, :sortable => false
     column :comments do |f|
@@ -52,10 +53,7 @@ ActiveAdmin.register Form do
       c > 0 ? c : ''
     end
     column :state, :sortable => :state do |f|
-      f.state.map do |s|
-        name, klass = s.to_s.split('_') 
-        span(:class =>"group_tag #{klass}") { name[0].upcase }
-      end.join(' ')
+      draw_tags f.state.sort
     end
     # default_actions
   end
