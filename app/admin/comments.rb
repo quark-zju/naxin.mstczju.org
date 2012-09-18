@@ -13,7 +13,6 @@ end
 ActiveAdmin.register ActiveAdmin::Comment, as: 'StaffComments', title: '评论' do
   menu label: '评论'
 
-
   actions :show, :index
 
   scope :all, :default => true

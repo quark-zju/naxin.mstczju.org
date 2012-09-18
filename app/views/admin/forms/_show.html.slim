@@ -29,7 +29,6 @@
         = k
         pre.wrap = v
 
-
 .block
   - form_next = Form.nospam.where('ID < ?', [@form.id]).order('ID DESC').first
   - if form_next
@@ -58,6 +57,25 @@ br
                   - if @form.state.include? "#{g}_#{st}".downcase.to_sym
                     - html_opt = { :class => 'disabled', :disabled => 'disabled' }
                   = button_to st.upcase, {:controller => 'admin/forms', :action => "#{g}_#{st}".downcase}, html_opt
+
+      hr.other_groups style='display:none'
+      table.other_groups style='display:none'
+        tbody
+          - (Form::GROUPS - @form.groups).each do |g|
+            tr
+              td = g.upcase
+              - Form::STATES.each do |st|
+                td
+                  /.action.input_action style='display: inline'
+                  - html_opt = {} 
+                  - if @form.state.include? "#{g}_#{st}".downcase.to_sym
+                    - html_opt = { :class => 'disabled', :disabled => 'disabled' }
+                  = button_to st.upcase, {:controller => 'admin/forms', :action => "#{g}_#{st}".downcase}, html_opt
+
+      script
+        | function show_other_groups() { $('.other_groups').toggle(); }
+      = link_to_function '显示其他 Group', 'show_other_groups()', :class => :other_groups
+
     / History
     - if  @form.admin_comments(:state).limit(1).count > 0
       .panel_contents
