@@ -19,6 +19,8 @@ ActiveAdmin.register ActiveAdmin::Comment, as: 'StaffComments', title: '评论' 
   scope :comment
   scope :state
 
+  config.batch_actions = false
+
   # filter :author_id
   filter :author_id, label: '作者', as: :select, :collection => proc { Staff.select([:name, :id]) }
   filter :body, label: '内容'
