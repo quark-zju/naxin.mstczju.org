@@ -57,7 +57,11 @@ class Form < ActiveRecord::Base
       new_state = []
     elsif group.nil?
       message   = "修改为 #{sym.to_s.upcase}"
-      new_state = self.groups.map {|g| "#{g}_#{sym}".downcase.to_sym }
+      if sym.to_sym.in? STATES
+        new_state = self.groups.map {|g| "#{g}_#{sym}".downcase.to_sym }
+      else
+        new_state = [sym.to_sym]
+      end
     else
       message   = "修改 #{group.to_s.upcase} 状态为 #{sym.to_s.upcase}"
       new_state = self.state.reject{|s| s.to_s.start_with?(group.to_s)} + ["#{group.to_s}_#{sym}".downcase.to_sym]
