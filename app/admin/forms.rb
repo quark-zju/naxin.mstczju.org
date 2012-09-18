@@ -1,6 +1,6 @@
 ActiveAdmin.register Form do
 
-  actions :all, :except => [:destroy, :edit, :new, :create, :update]
+  actions :show, :index
 
   scope :all, :default => true
   scope :accepted #, :show_count => false

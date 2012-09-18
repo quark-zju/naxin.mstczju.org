@@ -12,6 +12,7 @@ module Devise
         password = params[mapping.name][:password]
 
         email <<= mapping.to.email_postfix if ! email['@']
+
         result = JSON.parse(Net::HTTP.post_form(URI(mapping.to.remote_authenticate_url), 
                                                 username: email.sub(mapping.to.email_postfix, ''),
                                                 password: password).body)

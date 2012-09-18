@@ -3,6 +3,8 @@ zh_cn:
   activerecord:
     models:
       form: '报名表'
+      active_admin:
+        comment: '评论'
     attributes:
       form:
         name: '姓名'
@@ -24,10 +26,11 @@ zh_cn:
         q2: '你为什么选择了上面所报的部门？你觉得你进入所选部门后可以为社团作出怎样的贡献？你希望从社团活动中得到什么？'
         q3: '下面几个问题请至少选择一题作答。（1）你最喜欢的一个软件（或编程语言/技术）是什么？说明一下原因？（2）你对大学生活有什么设想？社团在你的大学生活中应该扮演怎样的角色？（3）对于 MSTC 来说，你喜欢哪一类形式的社团活动？'
         q4: '下面的区域可以随意发挥，尽情享用，展现自己最独特的一面。'
-      login_form:
-        username: '用户名'
-        password: '密码'
-
+      active_admin:
+        comment:
+          author: '作者'
+          body: "内容"
+          form: "资源"
 
   will_paginate:
     previous_label: '上一页'

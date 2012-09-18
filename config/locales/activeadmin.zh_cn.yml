@@ -78,3 +78,14 @@ zh_cn:
       links:
         sign_in: "登录"
         forgot_your_password: "忘记密码？"
+
+  activerecord:
+    models:
+      active_admin:
+        comment: '评论'
+    attributes:
+      active_admin:
+        comment:
+          author: '作者'
+          body: "内容"
+          form: "报名表"

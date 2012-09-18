@@ -15,17 +15,27 @@ body.active_admin {
   #collection_selection_toggle_panel {
     display: none;
   }
-  .部门, .groups {
-    min-width: 40px;
+  .部门 {
     width: 40px;
   }
-  .姓名, .name {
-    min-width: 60px;
+  .姓名 {
     width: 60px;
   }
-  .状态, .state {
-    min-width: 60px;
+  .状态 {
+    width: 60px;
   }
+
+  .时间 {
+    width: 90px;
+  }
+  .作者 {
+    width: 50px;
+  }
+  .报名表 {
+    width: 60px;
+  }
+
+
   .group_tag {
     color: white;
     background-color: #888a85;
@@ -76,9 +86,25 @@ body.active_admin {
     }
     a:hover {
       box-shadow: 0 0 5px #AD7FA8;
-      // border-radius: 0;
-      // outline: 2px solid 
     }
+  }
+
+  span.spam {
+    a, a:hover, a:visited {
+      background-color: #888a85;
+    }
+    a:hover {
+      box-shadow: 0 0 5px #888a85;
+    }
+  }
+
+  span a.comment {
+    color: #444;
+    text-decoration: none;
+  }
+
+  span a.comment:hover {
+    text-decoration: underline;
   }
 
   span.tg {
@@ -93,6 +119,7 @@ body.active_admin {
   span.pg {
     background-color: #75507b;
   }
+
 
 }
 
