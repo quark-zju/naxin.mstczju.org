@@ -4,7 +4,7 @@ gem 'rails', '3.2.8'
 
 gem 'sqlite3', '~> 1.3.6'
 gem 'client_side_validations', '~> 3.1.4'
-gem 'will_paginate', '~> 3.0.3'
+# gem 'will_paginate', '~> 3.0.3'
 gem 'bitmask_attributes', '~> 0.3.0'
 gem 'activeadmin', '~> 0.5.0'
 gem "meta_search", '~> 1.1.3'
