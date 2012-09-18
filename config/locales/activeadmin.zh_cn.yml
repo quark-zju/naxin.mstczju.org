@@ -30,7 +30,7 @@ zh_cn:
     main_content: "请执行 %{model}#main_content 来显示内容."
     logout: "退出"
     sidebars:
-      filters: "所有条件"
+      filters: "过滤器"
     pagination:
       empty: "暂时没有%{model}"
       one: "显示 <b>1</b> %{model}"
@@ -39,7 +39,7 @@ zh_cn:
       entry:
         one: "条目"
         other: "条目"
-    any: "任何"
+    any: "(不限)"
     blank_slate:
       content: "暂时还没有%{resource_name}."
       link: "新建一个"
