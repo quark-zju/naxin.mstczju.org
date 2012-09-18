@@ -18,6 +18,7 @@ ActiveAdmin.register_page "Dashboard" do
               end
             end
           end
+          span link_to '更多评论', admin_staff_comments_path
         end
       end
 
