@@ -44,7 +44,10 @@ ActiveAdmin.register ActiveAdmin::Comment, as: 'StaffComments', title: '评论' 
 
     column '状态' do |c|
       f = c.resource
-      draw_tags [*f.state, *(f.groups - f.state.map{|s| s[0..1].to_sym}).map{|s| "#{s}_unknown".to_sym}].sort
+      tags = [*f.state, *(f.groups - f.state.map{|s| s[0..1].to_sym}).map{|s| "#{s}_unknown".to_sym}].sort
+      subset = tags.reject{|t| t.to_s['_']}
+      tags = subset unless subset.empty?
+      draw_tags tags
     end
 
     column '内容', :sortable => false do |c|
