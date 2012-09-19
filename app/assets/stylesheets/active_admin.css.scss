@@ -17,25 +17,19 @@ body.active_admin {
   }
   .部门 {
     width: 40px;
+    min-width: 40px;
   }
-  .姓名 {
+  .姓名, .状态, .报名表 {
     width: 60px;
+    min-width: 60px;
   }
-  .状态 {
-    width: 60px;
-  }
-
   .时间 {
-    width: 90px;
+    width: 80px;
+    min-width: 80px;
   }
   .作者 {
-    width: 50px;
+    width: 46px;
   }
-  .报名表 {
-    width: 60px;
-  }
-
-
   .group_tag {
     color: white;
     background-color: #888a85;
@@ -57,6 +51,9 @@ body.active_admin {
   }
   span.yq {
     background-color: #204a87;
+  }
+  span.unknown {
+    background-color: #d3d7cf;
   }
 
   .male, .female, .spam {

@@ -42,9 +42,14 @@ ActiveAdmin.register ActiveAdmin::Comment, as: 'StaffComments', title: '评论' 
       span(class: f.gender_sym) { link_to f.name, admin_form_path(f) }
     end
 
+    column '状态' do |c|
+      f = c.resource
+      draw_tags [*f.state, *(f.groups - f.state.map{|s| s[0..1].to_sym}).map{|s| "#{s}_unknown".to_sym}].sort
+    end
+
     column '内容', :sortable => false do |c|
       span draw_tags([:state], false) if c.namespace == 'state'
-      span link_to(c.body, admin_form_path(c.resource), :class => 'comment')
+      span link_to(c.body, admin_form_path(c.resource) + "#active_admin_comment_#{c.id}", :class => 'comment')
     end
   end
   
