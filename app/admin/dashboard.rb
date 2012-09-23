@@ -50,7 +50,7 @@ ActiveAdmin.register_page "Dashboard" do
             counts[:all][person_state] += 1
           end
 
-          div class: '' do
+          div do
             table do
               thead do
                 tr do
@@ -67,8 +67,13 @@ ActiveAdmin.register_page "Dashboard" do
               end
             end
           end
-        end
-      end
+
+          hr
+
+          span "报名截止日期: #{FormsController::DEADLINE}"
+
+        end # panel
+      end # column
     end
   end # content
 end
