@@ -46,9 +46,8 @@ ActiveAdmin.register FtpLink do
       path = Dir["#{File.expand_path('~ftp')}/*/#{link.path}"].first
 
       # friendly download filename
-      response.headers['Content-Disposition'] = "attachment; filename=\"[#{link.year}] #{link.name}\""
       if path
-        send_file path 
+        send_file path, filename: "[#{link.year}] #{link.name}"
       else
         raise ActionController::RoutingError.new("Not Found in FTP Directory: #{link.path}")
       end
