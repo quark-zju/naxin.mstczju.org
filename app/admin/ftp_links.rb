@@ -46,7 +46,7 @@ ActiveAdmin.register FtpLink do
       path = Dir["#{File.expand_path('~ftp')}/*/#{link.path}"].first
 
       # friendly download filename
-      response.headers['Content-Disposition'] = "attachment; filename=\"#{link.name}\""
+      response.headers['Content-Disposition'] = "attachment; filename=\"[#{link.year}] #{link.name}\""
       if path
         send_file path 
       else
