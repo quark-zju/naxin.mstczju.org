@@ -30,14 +30,13 @@
         pre.wrap = v
 
 .block
+  = link_to_function '切换自动折行', '$("pre").toggleClass("wrap");', style: 'margin-right: 1em'
   - form_next = Form.nospam.where('ID < ?', [@form.id]).order('ID DESC').first
   - if form_next
     = link_to "下一个: #{form_next.name}", admin_form_path(form_next), class: 'rfloat'
   - form_prev = Form.nospam.where('ID > ?', [@form.id]).order('ID ASC').first
   - if form_prev
     = link_to "上一个: #{form_prev.name}", admin_form_path(form_prev)
-  - else
-    p 
 
 br
 

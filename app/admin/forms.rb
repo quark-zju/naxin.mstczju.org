@@ -6,15 +6,6 @@ ActiveAdmin.register Form do
 
   Form::GROUPS.each { |g| scope g, :title => g.upcase, :name => g.upcase }
   [*Form::STATES, :other].each { |st| scope st }
-  # scope :accepted #, :show_count => false
-  # scope :pending
-  # scope :rejected
-  # scope :other
-
-  # scope :t_g
-  # scope :o_g
-  # scope :c_g
-  # scope :p_g
 
   # Strict scope
   # scope_to :current_staff
