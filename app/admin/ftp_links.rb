@@ -27,7 +27,7 @@ ActiveAdmin.register FtpLink do
       if link.note.present?
         span "[#{link.note.to_sym}]", style: 'font-weight: bold;'
       end
-      span link_to(link.name, admin_ftp_link_path(link))
+      span link_to(link.name, admin_ftp_link_path(link), title: link.path)
     end
   end
 
