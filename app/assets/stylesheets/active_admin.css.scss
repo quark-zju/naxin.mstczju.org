@@ -34,7 +34,27 @@ body.active_admin {
     color: white;
     background-color: #888a85;
     padding: 2px 4px;
-    border-radius: 3.5px;
+    border-radius: 2px;
+  }
+  span.group_tag.summary {
+    background-color: #729fcf;
+    color: #204a87;
+  }
+  span.group_tag.plan {
+    background-color: #ad7fa8;
+    color: #5c3566;
+  }
+  span.group_tag.advertising {
+    background-color: #fce94f;
+    color: #c4a000;
+  }
+  .interview {
+    background-color: #ef2929;
+    // color: #a40000;
+  }
+  span.group_tag.notification {
+    background-color: #8ae234;
+    color: #4e9a06;
   }
 
   span.rejected {

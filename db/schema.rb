@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120916032528) do
+ActiveRecord::Schema.define(:version => 20120923132833) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(:version => 20120916032528) do
   end
 
   add_index "forms", ["spam", "id"], :name => "index_forms_on_spam_and_id"
+
+  create_table "ftp_links", :force => true do |t|
+    t.string   "name",                      :null => false
+    t.string   "path",                      :null => false
+    t.integer  "year",                      :null => false
+    t.integer  "tags",       :default => 0, :null => false
+    t.string   "note"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
 
   create_table "staffs", :force => true do |t|
     t.string   "email",               :default => "", :null => false

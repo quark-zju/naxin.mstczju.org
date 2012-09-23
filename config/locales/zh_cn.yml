@@ -5,6 +5,7 @@ zh_cn:
       form: '报名表'
       active_admin:
         comment: '评论'
+      ftp_link: 'FTP 资源'
     attributes:
       form:
         name: '姓名'
@@ -31,6 +32,10 @@ zh_cn:
           author: '作者'
           body: "内容"
           form: "资源"
+      ftp_link:
+        year: '年份'
+        name: '文件名'
+        tags: '标签'
 
   will_paginate:
     previous_label: '上一页'
