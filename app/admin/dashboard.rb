@@ -11,7 +11,7 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "最近评论" do
           ul do
-            ActiveAdmin::Comment.order('created_at DESC').first(16).map do |comment|
+            ActiveAdmin::Comment.order('created_at DESC').first(10).map do |comment|
               li do
                 [comment.author.name,
                 link_to(comment.body.truncate(140), admin_form_path(comment.resource))].join(': ').html_safe
@@ -26,7 +26,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "统计" do
           counts = Hash[[*Form::GROUPS, 'all'].map {|s| [s.to_sym, {}]}]
 
-          Form.nospam.each do |f|
+          Form.nospam.noduplicated.each do |f|
             state_groups = []
             person_state = []
 

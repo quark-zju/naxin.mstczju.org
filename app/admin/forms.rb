@@ -3,26 +3,23 @@ ActiveAdmin.register Form do
   actions :show, :index
 
   scope :all, :default => true
-  scope :accepted #, :show_count => false
-  scope :pending
-  scope :rejected
-  scope :other
+
+  Form::GROUPS.each { |g| scope g, :title => g.upcase, :name => g.upcase }
+  [*Form::STATES, :other].each { |st| scope st }
+  # scope :accepted #, :show_count => false
+  # scope :pending
+  # scope :rejected
+  # scope :other
+
+  # scope :t_g
+  # scope :o_g
+  # scope :c_g
+  # scope :p_g
 
   # Strict scope
   # scope_to :current_staff
 
   config.filters = false
-
-  # filter :name
-  # filter :major
-  # filter :gender
-  # filter :campus
-  # filter :tg, :as => :check_boxes, :collection => proc { Form.all }
-  # filter :og
-  # filter :cg
-  # filter :pg
-  # filter :spam
-  # filter :state
 
   # overwrites order, otherwise ActiveAdmin will append many ugly params
   # order logic exists in controller's scoped_collection

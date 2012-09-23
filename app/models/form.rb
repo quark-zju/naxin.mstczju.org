@@ -81,6 +81,10 @@ class Form < ActiveRecord::Base
       where(:spam => false).scoped
     end
 
+    def noduplicated
+      without_state(:duplicated)
+    end
+
     STATES.each do |st|
       define_method st do
         with_any_state(*GROUPS.map{|g| "#{g}_#{st}".to_sym}).scoped
@@ -103,6 +107,12 @@ class Form < ActiveRecord::Base
 
     def other
       without_state.scoped
+    end
+
+    GROUPS.each do |g|
+      define_method g do
+        with_any_state(*STATES.map{|st| "#{g}_#{st}".to_sym}).scoped
+      end
     end
   end
 
