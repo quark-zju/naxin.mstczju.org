@@ -30,6 +30,8 @@
         pre.wrap = v
 
 .block
+  script
+    | var w = $('#main_content');w.css('max-width', w.width()+'px');
   = link_to_function '切换自动折行', '$("pre").toggleClass("wrap");', style: 'margin-right: 1em'
   - form_next = Form.nospam.where('ID < ?', [@form.id]).order('ID DESC').first
   - if form_next
