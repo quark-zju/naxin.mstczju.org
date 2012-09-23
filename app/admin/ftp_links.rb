@@ -7,7 +7,7 @@ ActiveAdmin.register FtpLink do
   scope :all, :default => true
   
   FtpLink::TAGS.each do |tag|
-    scope tag, :default => (tag == :interview)
+    scope tag
   end
 
   config.filters = false
