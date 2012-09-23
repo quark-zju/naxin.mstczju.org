@@ -42,7 +42,7 @@ ActiveAdmin.register ActiveAdmin::Comment, as: 'StaffComments', title: '评论' 
       span(class: f.gender_sym) { link_to f.name, admin_form_path(f) }
     end
 
-    column '状态', :sortable => :state do |c|
+    column '状态' do |c|
       f = c.resource
       tags = [*f.state, *(f.groups - f.state.map{|s| s[0..1].to_sym}).map{|s| "#{s}_unknown".to_sym}].sort
       subset = tags.reject{|t| t.to_s['_']}
