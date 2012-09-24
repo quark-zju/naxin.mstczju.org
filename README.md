@@ -1,6 +1,4 @@
-MSTC.ZJU (Microsoft Technology Club of Zhejiang University) 纳新报名表提交及管理网站
-
-版权所有 (C) 2011 - 2012 MSTC.ZJU, 保留所有权利
+浙江大学微软技术俱乐部 (MSTC.ZJU) 纳新报名表提交及管理网站
 
 安装 / 运行
 ===========
