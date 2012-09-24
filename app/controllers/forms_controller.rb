@@ -28,6 +28,12 @@ class FormsController < ApplicationController
 
   def create
     @form = Form.new(params[:form])
+
+    # add staff comment
+    if current_staff
+      @form.comments = "由 #{current_staff.name} 提交"
+    end
+
     @form.user_agent = request.env['HTTP_USER_AGENT']
 
     if @form.save
@@ -53,10 +59,19 @@ class FormsController < ApplicationController
     end
   end
 
+  def deadline_exceed?
+    Date.today > DEADLINE
+  end
+
   private
 
   def before_deadline
-    if Date.today > DEADLINE
+    return unless deadline_exceed?
+
+    # staff ignores deadline
+    if current_staff
+      flash[:notice] = '已作为 Staff 登录，无视截止日期' if deadline_exceed?
+    else
       redirect_to forms_url, notice: '本次纳新报名已截止，欢迎关注 MSTC 的其他活动'
     end
   end
