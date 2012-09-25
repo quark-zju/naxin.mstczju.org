@@ -40,7 +40,7 @@ class Form < ActiveRecord::Base
   end
 
   def admin_comments(namespace = :admin)
-    ActiveAdmin::Comment.find_for_resource_in_namespace(self, namespace).scoped
+    ActiveAdmin::Comment.find_for_resource_in_namespace(self, namespace).order('id ASC').scoped
   end
 
   def create_admin_comment!(author, body, namespace = :admin)

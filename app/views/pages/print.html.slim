@@ -1,0 +1,14 @@
+- @forms.each do |f|
+  .form
+    = render '/admin/forms/form', {form: f, print: true}
+  .comment
+    - f.admin_comments.each do |c|
+      table
+        tr
+          td.author style='width: 60px; min-width: 60px;' 
+            = c.author
+            /br
+            /span.time = c.created_at.strftime('%m.%d %H')
+          td.body = simple_format c.body
+  p.page_break 
+

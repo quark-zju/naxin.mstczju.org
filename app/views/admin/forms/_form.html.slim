@@ -1,0 +1,48 @@
+- if not defined?(print); print = false; end
+
+.block
+  - if not print
+    h3 class="#{form.gender_sym}" = form.name
+    - if form.spam
+      span 此报名表已被鉴定为灌水而可以忽略
+    - else
+      = draw_tags form.groups.sort, false
+      = splitter
+      = draw_tags form.state.sort, false
+      = splitter
+      = draw_tags [form.campus_sym], false
+      = splitter
+      = form.major
+      = splitter
+      = form.tel
+      = splitter
+      = link_to form.email, "mailto:#{form.email}"
+      = splitter
+      - if form.forum_id.present?
+        = link_to form.forum_id.to_s, "http://www.cc98.org/dispuser.asp?name=#{form.forum_id}", target: '_blank'
+        = splitter
+      = l form.created_at
+      - form.user_agent.presence.try do |ua|
+        = splitter
+        - agent = UserAgent.parse(ua)
+        span title="#{ua}" = "#{agent.browser} #{agent.version} @ #{agent.platform}"
+  - else # print
+    table
+      tr
+        td
+          h1 = form.name
+        td.basic_info
+          span.groups = form.groups.map(&:to_s).map(&:upcase).join(', ')
+          | ; 
+          span.groups = form.state.map(&:to_s).map(&:upcase).join(', ').gsub(/_/, '::')
+          br
+          span.info = [form.major, form.gender_sym, form.campus_sym, form.tel, "cc98: #{form.forum_id || '(n/a)'}", form.email].join(' | ')
+          - if form.user_agent.present?
+            br
+            span.ua = form.user_agent
+
+  - { '' => form.q1, '报名原因' => form.q2, '喜欢软件/生活设想/活动形式' => form.q3, '其他' => form.q4, '注释' => form.comments }.each do |k, v| 
+    - if v.present?
+      - if not print
+        = k
+      pre.wrap = v

@@ -1,0 +1,85 @@
+html
+  head
+    style
+      | pre.wrap {
+          white-space: pre-wrap;       /* css-3 */
+          white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+          white-space: -pre-wrap;      /* Opera 4-6 */
+          white-space: -o-pre-wrap;    /* Opera 7 */
+          word-wrap: break-word;
+        }
+        .form .info {
+          font-size: 0.8em;
+        }
+        .form, .block {
+          font-family: 'Microsoft YaHei', 'Consolas';
+          font-size: 13px;
+        }
+        .form .block h1 {
+          font-size: 35px;
+          font-weight: normal;
+        }
+        .ua {
+          font-family: Arial;
+          font-size: 10px;
+        }
+        .form pre {
+          font-family: Consolas;
+          margin: 5px 0;
+          padding: 0;
+          border-top: 1px dashed black;
+        }
+        .form h1 {
+          min-width: 130px;
+        }
+        .comment, .comment table tr td, .comment table tr td p {
+          font-family: Consolas;
+          font-size: 12px !important;
+          line-height: 1 !important;
+          /*-moz-column-count: 2;
+          -moz-column-gap: 10px;
+          -webkit-column-count: 2;
+          -webkit-column-gap: 10px;
+          column-count: 2;
+          column-gap: 10px;*/
+        }
+        /*.comment td.body p {
+          font-size: 12px;
+          padding: 0;
+          margin: 0;
+        }
+        .comment td.author {
+          font-size: 10px;
+          padding-right: 4px;
+          text-align: right;
+          line-height: 1;
+        }
+        .comment td.author .time {
+          font-size: 8px;
+          font-family: Arial;
+        }
+        */
+        body, html, hr, tr, td, p, h1, h2, h3 {
+          margin: 0px;
+          padding: 0;
+          vertical-align:top;
+        }
+        .comment {
+          border-top: 1px solid black;
+        }
+        @media screen {
+          .page_break::after {
+            background: #888;
+            color: white;
+            text-align: center;
+            display: block;
+            content: 'Page Break';
+          }
+        }
+        @media print {
+          .page_break {
+            page-break-after: always;
+          }
+        }
+  body
+    = yield

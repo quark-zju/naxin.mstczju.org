@@ -1,6 +1,8 @@
+# coding: utf-8
+
 ActiveAdmin.register Form do
 
-  actions :show, :index
+  actions :show, :index, :print
 
   scope :all, :default => true
 
@@ -93,4 +95,9 @@ ActiveAdmin.register Form do
     redirect_to :back
   end
 
+  collection_action :print, :method => :get do
+    redirect_to print_path
+  end
+
+  action_item { link_to('面试打印版', print_admin_forms_path) }
 end
