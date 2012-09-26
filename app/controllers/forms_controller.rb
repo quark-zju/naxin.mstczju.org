@@ -67,17 +67,18 @@ class FormsController < ApplicationController
     raise ActionController::MethodNotAllowed.new(:about) unless current_staff
 
     orders = {}
+    forms = Form.nospan.pending
 
     params[:sort].try do |namelist|
       namelist.split(/,/).each.with_index do |name, i|
-        form = Form.select(:id).find_by_name(name)
+        form = forms.select(:id).find_by_name(name)
         next unless form
         orders[form.id] = i
       end
     end
 
-    count  = Form.count
-    @forms = Form.nospam.pending.sort_by { |f| orders[f.id] || count }
+    count  = forms.count
+    @forms = forms.sort_by { |f| orders[f.id] || count }
 
     render layout: 'print'
   end
