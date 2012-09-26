@@ -67,7 +67,7 @@ class FormsController < ApplicationController
     raise ActionController::MethodNotAllowed.new(:about) unless current_staff
 
     orders = {}
-    forms = Form.nospan.pending
+    forms = Form.nospam.pending
 
     params[:sort].try do |namelist|
       namelist.split(/,/).each.with_index do |name, i|
