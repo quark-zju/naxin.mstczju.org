@@ -2,6 +2,7 @@ NaxinMstczjuOrg::Application.routes.draw do
   resources :forms, only: [:index, :update, :create, :new, :edit] do
     collection do
       get :edit, as: 'edit_self'
+      get :print, as: 'print'
     end
   end
 
@@ -14,6 +15,6 @@ NaxinMstczjuOrg::Application.routes.draw do
 
   match '/login' => redirect('/admin')
   match '/about', :to => 'pages#about'
-  match '/print', :to => 'pages#print'
+  # match '/print', :to => 'forms#print'
 
 end

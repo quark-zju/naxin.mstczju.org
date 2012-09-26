@@ -63,6 +63,25 @@ class FormsController < ApplicationController
     Date.today > DEADLINE
   end
 
+  def print
+    raise ActionController::MethodNotAllowed.new(:about) unless current_staff
+
+    orders = {}
+
+    params[:sort].try do |namelist|
+      namelist.split(/,/).each.with_index do |name, i|
+        form = Form.select(:id).find_by_name(name)
+        next unless form
+        orders[form.id] = i
+      end
+    end
+
+    count  = Form.count
+    @forms = Form.nospam.pending.sort_by { |f| orders[f.id] || count }
+
+    render layout: 'print'
+  end
+
   private
 
   def before_deadline
