@@ -1,6 +1,6 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.11'
 
 gem 'sqlite3', '~> 1.3.6'
 gem 'client_side_validations', '~> 3.1.4'
